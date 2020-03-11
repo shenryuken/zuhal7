@@ -93,7 +93,7 @@
 						<label class="control-label">{{ __('Referral') }}<span class="text-primary"> (username of introducer)</span></label>
 						<div class="row row-space-10">
 							<div class="col-md-6 m-b-15">
-								<input id="referral" type="text" class="form-control @error('referral') is-invalid @enderror" name="referral" value="{{ old('referral') }}" required autocomplete="referral" autofocus>
+								<input id="referral" type="text" class="form-control" name="referral" value="{{ old('referral') }}" autocomplete="referral" autofocus>
 								<span class="text-primary"> (Leave blank if no introducer)</span>
                                 @error('referral')
                                     <span class="invalid-feedback" role="alert">
@@ -114,7 +114,7 @@
 							<button type="submit" class="btn btn-primary btn-block btn-lg">{{ __('Register') }}</button>
 						</div>
 						<div class="m-t-30 m-b-30 p-b-30">
-							Already a member? Click <a href="login_v3.html">here</a> to login.
+							Already a member? Click <a href="{{ route('login') }}">here</a> to login.
 						</div>
 						<hr />
 						<p class="text-center mb-0">
