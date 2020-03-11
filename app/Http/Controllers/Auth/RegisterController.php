@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'referral' => ['string', 'exists:users,name'],
         ]);
     }
 
@@ -64,10 +65,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        // return User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        //     'referral' => $data['referral'],
+        // ]);
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'referral' => $data['referral'],
         ]);
+
+        $this->updateReferral($data);
+
+        return $user;
+    }
+
+    public function updateReferral(array $data)
+    {
+        if($data['referral'])
+        {
+            $user = User::where('name',$data['referral'])->first();
+            $user->total_referrals =  $user->total_referrals + 1;
+            $user->save();
+        }
     }
 }
