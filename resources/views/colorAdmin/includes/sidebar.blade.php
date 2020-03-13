@@ -43,6 +43,18 @@
 						<a href="javascript:;">
 							<span class="badge pull-right">10</span>
 							<i class="fa fa-hdd"></i>
+							<span>Users</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="{{url('users')}}">List</a></li>
+							<li><a href="email_compose.html">Compose</a></li>
+							<li><a href="email_detail.html">Detail</a></li>
+						</ul>
+					</li>
+					<li class="has-sub">
+						<a href="javascript:;">
+							<span class="badge pull-right">10</span>
+							<i class="fa fa-hdd"></i>
 							<span>Email</span>
 						</a>
 						<ul class="sub-menu">
