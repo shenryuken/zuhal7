@@ -22,7 +22,7 @@
 		<div class="panel panel-inverse">
 			<!-- begin panel-heading -->
 			<div class="panel-heading">
-				<h4 class="panel-title">Users List </h4>
+				<h4 class="panel-title">Users List <span><a href="{{route('users.create')}}" class="btn btn-primary">Add User</a></span></h4>
 				<div class="panel-heading-btn">
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
@@ -46,10 +46,13 @@
 						</tr>
 					</thead>
 					<tbody>
+					@php
+						$count = 1;
+					@endphp
 					@foreach ($users as $user)
 				        @if ($loop->odd)
 				        <tr class="odd gradeX">
-							<td width="1%" class="f-s-600 text-inverse">1</td>
+							<td width="1%" class="f-s-600 text-inverse">{{$count++}}</td>
 							<td width="1%" class="with-img"><img src="{{ asset('colorAdmin/img/user/user-1.jpg')}}" class="img-rounded height-30" /></td>
 							<td>{{$user->name}}</td>
 							<td>{{$user->email}}</td>
@@ -59,7 +62,7 @@
 						</tr>
 				        @elseif ($loop->even)
 				        <tr class="even gradeC">
-							<td width="1%" class="f-s-600 text-inverse">2</td>
+							<td width="1%" class="f-s-600 text-inverse">{{$count++}}</td>
 							<td width="1%" class="with-img"><img src="{{ asset('colorAdmin/img/user/user-2.jpg')}}" class="img-rounded height-30" /></td>
 							<td>{{$user->name}}</td>
 							<td>{{$user->email}}</td>
