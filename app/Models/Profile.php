@@ -6,8 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-    public function create()
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public $fillable = [
+        'first_name', 
+        'last_name', 
+        'icno', 
+        'gender', 
+        'contact_mobile', 
+        'contact_home', 
+        'contact_office',
+        'street', 
+        'city', 
+        'postcode', 
+        'state', 
+        'country',
+    ];
+
+    public function user()
     {
-    	return view('profiles.create');
-    }
+    	return $this->belongsTo('App\Models\User');
+    } 
 }

@@ -26,3 +26,19 @@ Route::get('users', 'UserController@index')->name('users.list');
 Route::get('users/create', 'UserController@create')->name('users.create');
 Route::post('users', 'UserController@store')->name('users.store');
 //End Users
+
+//Profiles
+
+Route::get('profiles/create', 'ProfileController@create')->name('profiles.create');
+Route::get('profiles/{user_id}', 'ProfileController@show')->name('profiles.show');
+Route::get('profiles/{id}/edit', 'ProfileController@edit')->name('profiles.edit');
+Route::post('profiles', 'ProfileController@store')->name('profiles.store');
+Route::put('profiles/{id}', "ProfileController@update")->name('profiles.update');
+//End Profile
+
+//Dropdown
+Route::get('dropdown', 'DropdownController@index');
+Route::get('getCountries', 'DropdownController@getCountries');
+Route::get('getStates/{country_id}', 'DropdownController@getStates');
+Route::get('getCities/{state_id}', 'DropdownController@getCities');
+//End Dropdown

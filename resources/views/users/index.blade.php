@@ -42,7 +42,7 @@
 							<th class="text-nowrap">Email</th>
 							<th class="text-nowrap">Referral</th>
 							<th class="text-nowrap">Total Referrals</th>
-							<th class="text-nowrap">CSS grade</th>
+							<th class="text-nowrap"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -58,7 +58,7 @@
 							<td>{{$user->email}}</td>
 							<td>{{$user->referral}}</td>
 							<td>{{$user->total_referrals}}</td>
-							<td class="with-img">X</td>
+							<td><a href="{!! route('profiles.show', [$user->id]) !!}" class="btn btn-sm btn-primary width-60 m-r-2">Profile</a></td>
 						</tr>
 				        @elseif ($loop->even)
 				        <tr class="even gradeC">
@@ -68,7 +68,14 @@
 							<td>{{$user->email}}</td>
 							<td>{{$user->referral}}</td>
 							<td>{{$user->total_referrals}}</td>
-							<td>C</td>
+							<td>
+								<a href="{!! route('profiles.show', [$user->id]) !!}" class="btn btn-sm btn-primary width-60 m-r-2">Profile</a>
+								<form method="POST" action=/users/{{$user->id}}">
+							        {{ csrf_field() }}
+							        {{ method_field('DELETE') }}
+							        <input type="submit" class="btn btn-danger delete-user" value="Delete user">
+							    </form>
+							</td>
 						</tr>
 				        @endif
 					@endforeach
@@ -93,12 +100,12 @@
 	<script src="{{ asset('colorAdmin/plugins/datatables.net-autofill-bs4/js/autofill.bootstrap4.min.js')}}"></script>
 	<script src="{{ asset('colorAdmin/plugins/datatables.net-colreorder/js/dataTables.colreorder.min.js')}}"></script>
 	<script src="{{ asset('colorAdmin/plugins/datatables.net-colreorder-bs4/js/colreorder.bootstrap4.min.js')}}"></script>
-	<script src="{{ asset('colorAdmin/plugins/datatables.net-keytable/js/dataTables.keytable.min.js')}}"></script>
-	<script src="{{ asset('colorAdmin/plugins/datatables.net-keytable-bs4/js/keytable.bootstrap4.min.js')}}"></script>
+	<!-- <script src="{{ asset('colorAdmin/plugins/datatables.net-keytable/js/dataTables.keytable.min.js')}}"></script>
+	<script src="{{ asset('colorAdmin/plugins/datatables.net-keytable-bs4/js/keytable.bootstrap4.min.js')}}"></script> -->
 	<script src="{{ asset('colorAdmin/plugins/datatables.net-rowreorder/js/dataTables.rowreorder.min.js')}}"></script>
 	<script src="{{ asset('colorAdmin/plugins/datatables.net-rowreorder-bs4/js/rowreorder.bootstrap4.min.js')}}"></script>
-	<script src="{{ asset('colorAdmin/plugins/datatables.net-select/js/dataTables.select.min.js')}}"></script>
-	<script src="{{ asset('colorAdmin/plugins/datatables.net-select-bs4/js/select.bootstrap4.min.js')}}"></script>
+	<!-- <script src="{{ asset('colorAdmin/plugins/datatables.net-select/js/dataTables.select.min.js')}}"></script>
+	<script src="{{ asset('colorAdmin/plugins/datatables.net-select-bs4/js/select.bootstrap4.min.js')}}"></script> -->
 	<script src="{{ asset('colorAdmin/plugins/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
 	<script src="{{ asset('colorAdmin/plugins/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
 	<script src="{{ asset('colorAdmin/plugins/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
@@ -111,3 +118,4 @@
 	<script src="{{ asset('colorAdmin/js/demo/table-manage-combine.demo.js')}}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 @endsection
+

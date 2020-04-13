@@ -15,10 +15,20 @@ use Auth;
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
     	$users = User::all();
-    	 return view('users.index', compact('users'));
+    	return view('users.index', compact('users'));
     }
 
     public function create()
@@ -30,31 +40,31 @@ class UserController extends Controller
     {
     	try{
 
-    	$request->validate([
-            'name'		=>'required',
-            'email'		=>'required|confirmed'
-        ]);
+        	$request->validate([
+                'name'		=>'required',
+                'email'		=>'required|confirmed'
+            ]);
 
-        $user = new User;
-        $user->name 	= $request->name;
-        $user->email 	= $request->email;
+            $user = new User;
+            $user->name 	= $request->name;
+            $user->email 	= $request->email;
 
-        $temporaryPassword = str_random(8);
+            $temporaryPassword = str_random(8);
 
-        $user->password = Hash::make($temporaryPassword);
-        $user->referral = Auth::user()->name;
-        $user->save();
+            $user->password = Hash::make($temporaryPassword);
+            $user->referral = Auth::user()->name;
+            $user->save();
 
-        //update total_referrals for introducer
-        $referral = User::where('name',$user->referral)->first();
-        $referral->total_referrals =  $user->total_referrals + 1;
-        $referral->save();  
+            //update total_referrals for introducer
+            $referral = User::where('name',$user->referral)->first();
+            $referral->total_referrals =  $user->total_referrals + 1;
+            $referral->save();  
 
-        $details = ['referral' => $user->referral, 'name' => $user->name, 'email' => $user->email, 'temporaryPassword' => $temporaryPassword];
-        //send registration details email
+            $details = ['referral' => $user->referral, 'name' => $user->name, 'email' => $user->email, 'temporaryPassword' => $temporaryPassword];
+            //send registration details email
 
-        //dd($details);
-        Mail::to($user->email)->send(new RegisterEmailByIntroducer($details));
+            //dd($details);
+            Mail::to($user->email)->send(new RegisterEmailByIntroducer($details));
 
     	}  catch (\Exception $e) {
 
@@ -63,5 +73,13 @@ class UserController extends Controller
 
         //return view('users.index');  
         return redirect()->action('UserController@index');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return view('users.index')->with('success', 'User deleted!');;
     }
 }
