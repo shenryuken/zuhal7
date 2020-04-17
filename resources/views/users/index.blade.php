@@ -37,12 +37,12 @@
 					<thead>
 						<tr>
 							<th width="1%"></th>
-							<th width="1%" data-orderable="false"></th>
+							
 							<th class="text-nowrap">Name</th>
 							<th class="text-nowrap">Email</th>
 							<th class="text-nowrap">Referral</th>
 							<th class="text-nowrap">Total Referrals</th>
-							<th class="text-nowrap"></th>
+							<th class="text-nowrap">Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,27 +53,34 @@
 				        @if ($loop->odd)
 				        <tr class="odd gradeX">
 							<td width="1%" class="f-s-600 text-inverse">{{$count++}}</td>
-							<td width="1%" class="with-img"><img src="{{ asset('colorAdmin/img/user/user-1.jpg')}}" class="img-rounded height-30" /></td>
+							
 							<td>{{$user->name}}</td>
 							<td>{{$user->email}}</td>
 							<td>{{$user->referral}}</td>
 							<td>{{$user->total_referrals}}</td>
-							<td><a href="{!! route('profiles.show', [$user->id]) !!}" class="btn btn-sm btn-primary width-60 m-r-2">Profile</a></td>
+							<td class="with-btn">
+								<a href="{!! route('profiles.show', [$user->id]) !!}" class="btn btn-sm btn-primary width-60 m-r-2">Profile</a>
+								<form method="POST" action="{{route('users.delete', $user->id)}}" class="btn">
+							        @csrf
+                    				@method('DELETE')
+							        <input type="submit" class="btn btn-sm btn-danger delete-user" value="Delete">
+							    </form>
+							</td>
 						</tr>
 				        @elseif ($loop->even)
 				        <tr class="even gradeC">
 							<td width="1%" class="f-s-600 text-inverse">{{$count++}}</td>
-							<td width="1%" class="with-img"><img src="{{ asset('colorAdmin/img/user/user-2.jpg')}}" class="img-rounded height-30" /></td>
+							
 							<td>{{$user->name}}</td>
 							<td>{{$user->email}}</td>
 							<td>{{$user->referral}}</td>
 							<td>{{$user->total_referrals}}</td>
-							<td>
+							<td class="with-btn">
 								<a href="{!! route('profiles.show', [$user->id]) !!}" class="btn btn-sm btn-primary width-60 m-r-2">Profile</a>
-								<form method="POST" action=/users/{{$user->id}}">
-							        {{ csrf_field() }}
-							        {{ method_field('DELETE') }}
-							        <input type="submit" class="btn btn-danger delete-user" value="Delete user">
+								<form method="POST" action="{{route('users.delete', $user->id)}}" class="btn">
+							        @csrf
+                    				@method('DELETE')
+							        <input type="submit" class="btn btn-sm btn-danger delete-user" value="Delete">
 							    </form>
 							</td>
 						</tr>
@@ -117,5 +124,15 @@
 	<script src="{{ asset('colorAdmin/plugins/jszip/dist/jszip.min.js')}}"></script>
 	<script src="{{ asset('colorAdmin/js/demo/table-manage-combine.demo.js')}}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
+
+	<script>
+    $('.delete-user').click(function(e){
+        e.preventDefault() // Don't post the form, unless confirmed
+        if (confirm('Are you sure?')) {
+            // Post the form
+            $(e.target).closest('form').submit() // Post the surrounding form
+        }
+    });
+</script>
 @endsection
 
