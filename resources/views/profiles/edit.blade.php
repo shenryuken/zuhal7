@@ -124,7 +124,8 @@
 						</tr>
 						<tr>
 							<td>
-								<a href="{{ route('profiles.edit',$profile->id)}}" class="btn btn-primary">Edit</a>
+								<a href="{{ route('profiles.edit',$profile->id)}}" class="btn btn-primary">Update</a>
+								<a href="{{URL::previous()}}" class="btn btn-grey">Cancel</a>
 							</td>
 						</tr>
 					</tbody>

@@ -57,7 +57,7 @@ class UserController extends Controller
 
             //update total_referrals for introducer
             $referral = User::where('name',$user->referral)->first();
-            $referral->total_referrals =  $user->total_referrals + 1;
+            $referral->total_referrals =  $referral->total_referrals + 1;
             $referral->save();  
 
             $details = ['referral' => $user->referral, 'name' => $user->name, 'email' => $user->email, 'temporaryPassword' => $temporaryPassword];
@@ -80,6 +80,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return view('users.index')->with('success', 'User deleted!');;
+        return redirect('users')->with('success', 'User deleted!');;
     }
 }
