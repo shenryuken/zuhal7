@@ -10,8 +10,10 @@ use App\Mail\RegisterEmailByIntroducer;
 
 use App\Models\User;
 
-use Auth;
+use Spatie\Permission\Models\Role;
 
+use Auth;
+use DB;
 
 class UserController extends Controller
 {
