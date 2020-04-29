@@ -1,4 +1,4 @@
-<!-- begin #sidebar -->
+begin #sidebar -->
 		<div id="sidebar" class="sidebar">
 			<!-- begin sidebar scrollbar -->
 			<div data-scrollbar="true" data-height="100%">
@@ -27,18 +27,6 @@
 				<!-- end sidebar user -->
 				<!-- begin sidebar nav -->
 				<ul class="nav"><li class="nav-header">Navigation</li>
-					<li class="has-sub active">
-						<a href="javascript:;">
-							<b class="caret"></b>
-							<i class="fa fa-th-large"></i>
-							<span>Dashboard</span>
-						</a>
-						<ul class="sub-menu">
-							<li><a href="index.html">Dashboard v1</a></li>
-							<li><a href="index_v2.html">Dashboard v2</a></li>
-							<li class="active"><a href="index_v3.html">Dashboard v3</a></li>
-						</ul>
-					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
 							<span class="badge pull-right">10</span>
@@ -47,8 +35,8 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="{{url('users')}}">List</a></li>
-							<li><a href="email_compose.html">Compose</a></li>
-							<li><a href="email_detail.html">Detail</a></li>
+							<!-- <li><a href="email_compose.html">Compose</a></li>
+							<li><a href="email_detail.html">Detail</a></li> -->
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -342,4 +330,4 @@
 			<!-- end sidebar scrollbar -->
 		</div>
 		<div class="sidebar-bg"></div>
-		<!-- end #sidebar -->
+		<!-- end #sidebar

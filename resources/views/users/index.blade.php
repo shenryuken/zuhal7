@@ -11,6 +11,8 @@
 	<link href="{{ asset('colorAdmin/plugins/datatables.net-keytable-bs4/css/keytable.bootstrap4.min.css')}}" rel="stylesheet" />
 	<link href="{{ asset('colorAdmin/plugins/datatables.net-rowreorder-bs4/css/rowreorder.bootstrap4.min.css')}}" rel="stylesheet" />
 	<link href="{{ asset('colorAdmin/plugins/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}" rel="stylesheet" />
+
+	<link href="{{ asset('colorAdmin/plugins/gritter/css/jquery.gritter.css')}}" rel="stylesheet" />
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 @endsection
 
@@ -37,12 +39,12 @@
 					<thead>
 						<tr>
 							<th width="1%"></th>
-							
 							<th class="text-nowrap">Name</th>
 							<th class="text-nowrap">Email</th>
 							<th class="text-nowrap">Referral</th>
 							<th class="text-nowrap">Total Referrals</th>
 							<th class="text-nowrap">Action</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -58,7 +60,7 @@
 							<td>{{$user->email}}</td>
 							<td>{{$user->referral}}</td>
 							<td>{{$user->total_referrals}}</td>
-							<td class="with-btn">
+							<td class="with-btn" nowrap="">
 								<a href="{!! route('profiles.show', [$user->id]) !!}" class="btn btn-sm btn-primary width-60 m-r-2">Profile</a>
 								<form method="POST" action="{{route('users.delete', $user->id)}}" class="btn">
 							        @csrf
@@ -66,28 +68,30 @@
 							        <input type="submit" class="btn btn-sm btn-danger delete-user" value="Delete">
 							    </form>
 							</td>
+							
 						</tr>
 				        @elseif ($loop->even)
 				        <tr class="even gradeC">
 							<td width="1%" class="f-s-600 text-inverse">{{$count++}}</td>
-							
 							<td>{{$user->name}}</td>
 							<td>{{$user->email}}</td>
 							<td>{{$user->referral}}</td>
 							<td>{{$user->total_referrals}}</td>
-							<td class="with-btn">
+							<td class="with-btn" nowrap="">
 								<a href="{!! route('profiles.show', [$user->id]) !!}" class="btn btn-sm btn-primary width-60 m-r-2">Profile</a>
-								<form method="POST" action="{{route('users.delete', $user->id)}}" class="btn">
+								<form method="POST" action="{{route('users.delete', $user->id)}}" class="btn" id="form-delete">
 							        @csrf
                     				@method('DELETE')
 							        <input type="submit" class="btn btn-sm btn-danger delete-user" value="Delete">
 							    </form>
 							</td>
+							
 						</tr>
 				        @endif
 					@endforeach
 					</tbody>
 				</table>
+
 			</div>
 			<!-- end panel-body -->
 		</div>
@@ -123,16 +127,20 @@
 	<script src="{{ asset('colorAdmin/plugins/pdfmake/build/vfs_fonts.js')}}"></script>
 	<script src="{{ asset('colorAdmin/plugins/jszip/dist/jszip.min.js')}}"></script>
 	<script src="{{ asset('colorAdmin/js/demo/table-manage-combine.demo.js')}}"></script>
+
+	<script src="{{ asset('colorAdmin/plugins/gritter/js/jquery.gritter.js')}}"></script>
+	<script src="{{ asset('colorAdmin/plugins/sweetalert/dist/sweetalert.min.js')}}"></script>
+	<script src="{{ asset('colorAdmin/js/demo/ui-modal-notification.demo.js')}}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
 	<script>
-    $('.delete-user').click(function(e){
-        e.preventDefault() // Don't post the form, unless confirmed
-        if (confirm('Are you sure?')) {
-            // Post the form
-            $(e.target).closest('form').submit() // Post the surrounding form
-        }
-    });
-</script>
+	    $('.delete-user').click(function(e){
+	         e.preventDefault() // Don't post the form, unless confirmed
+	         if (confirm('Are you sure?')) {
+	             // Post the form
+	             $(e.target).closest('form').submit() // Post the surrounding form
+	         }
+	    });
+	</script>
 @endsection
 
